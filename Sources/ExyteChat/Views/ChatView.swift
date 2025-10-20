@@ -872,7 +872,7 @@ public extension ChatView {
 
 public extension ChatView where MessageContent == EmptyView, InputViewContent == EmptyView {
 
-    init(messages: Binding<[Message]>,
+    init(messages: [Message],
          chatType: ChatType = .conversation,
          replyMode: ReplyMode = .quote,
          didSendMessage: @escaping (DraftMessage) -> Void,
@@ -881,8 +881,8 @@ public extension ChatView where MessageContent == EmptyView, InputViewContent ==
         self.type = chatType
         self.didSendMessage = didSendMessage
         self.reactionDelegate = reactionDelegate
-        self.sections = ChatView.mapMessages(messages.wrappedValue, chatType: chatType, replyMode: replyMode)
-        self.ids = messages.wrappedValue.map { $0.id }
+        self.sections = ChatView.mapMessages(messages, chatType: chatType, replyMode: replyMode)
+        self.ids = messages.map { $0.id }
         self.messageMenuAction = messageMenuAction
     }
 }
